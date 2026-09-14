@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="palette.css?v=5">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="header-main">
+        <h1>Via Tenting</h1>
+      </div>
+      <p class="header-sub">Group vias by net, select by drill size, apply solder mask</p>
+    </header>
+
+    <div id="status" class="status hidden" hidden></div>
+
+    <section class="panel panel-table">
+      <div class="section section-row">
+        <div>
+          <span class="section-label">Via groups</span>
+          <span class="section-hint" id="viaCountHint">Click Refresh to scan the open board</span>
+        </div>
+        <button id="refreshBtn" class="btn-inline" type="button">Refresh</button>
+      </div>
+
+      <div class="section section-row group-controls">
+        <label class="group-mode">
+          <span class="section-hint">Group by</span>
+          <select id="groupMode" aria-label="Group vias by">
+            <option value="net_drill">Net + drill size</option>
+            <option value="net">Net only</option>
+            <option value="drill">Drill size only</option>
+          </select>
+        </label>
+        <label class="select-all-label">
+          <input id="selectAll" type="checkbox">
+          <span>Select all</span>
+        </label>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="table-wrap">
+        <table class="via-table" aria-label="Via groups">
+          <thead>
+            <tr>
+              <th class="col-check"></th>
+              <th class="col-drill">Drill</th>
+              <th class="col-net">Net</th>
+              <th class="col-qty">Qty</th>
+              <th class="col-mask">Mask</th>
+            </tr>
+          </thead>
+          <tbody id="viaTableBody">
+            <tr class="empty-row">
+              <td colspan="5">No vias loaded yet</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel panel-controls">
+      <div class="section">
+        <span class="section-label">Solder mask for selected groups</span>
+        <span class="section-hint">Off tents vias; Auto exposes mask</span>
+        <div class="seg mask-seg" role="group" aria-label="Solder mask mode">
+          <button type="button" id="btnMaskAuto" data-mode="auto">Auto</button>
+          <button type="button" id="btnMaskOff" class="active" data-mode="off">Off</button>
+          <button type="button" id="btnMaskOffset" data-mode="offset" style="display: none;" hidden>Offset</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="actions">
+      <button id="applyBtn" class="btn-primary" type="button">Apply to selected</button>
+      <button id="closeBtn" class="btn-secondary" type="button">Close</button>
+    </div>
+
+    <p class="footnote">Design Preferences → Masks → Limit is automatically set to 999 mil for Off and Auto</p>
+  </div>
+  <script src="palette.js?v=9"></script>
+</body>
+</html>

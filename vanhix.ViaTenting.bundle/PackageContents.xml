@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ApplicationPackage
+  SchemaVersion="1.0"
+  AutodeskProduct="Fusion360"
+  Name="VanHix Via Tenting"
+  Description="List all PCB vias and set solder mask for every via in one click."
+  AppVersion="1.0.0"
+  ProductType="Application">
+  <CompanyDetails
+    Name="VanHix"
+    Email="support@vanhix.com"
+    Url="https://vanhix.com" />
+  <Components Description="VanHix Via Tenting for Fusion Electronics PCB workflows">
+    <RuntimeRequirements OS="Win64|Mac" Platform="Fusion360" SeriesMin="" SeriesMax="" />
+    <ComponentEntry
+      AppName="VanHix Via Tenting"
+      Version="1.0.0"
+      ModuleName="./Contents/vanhix.ViaTenting.manifest"
+      AppDescription="Scan all vias on the open PCB board and bulk-set solder mask (Auto, Off, Offset)." />
+  </Components>
+</ApplicationPackage>

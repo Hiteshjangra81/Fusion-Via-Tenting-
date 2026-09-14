@@ -1,0 +1,20 @@
+﻿# Python / Cache / Temp
+__pycache__/
+*.py[cod]
+*$py.class
+*.log
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Project internals & dev tools (kept local only)
+.agents/
+.cursor/
+.venv*/
+docs/
+graphify-out/
+installer/
+scripts/
+requirements-graphify.txt
+*.zip
+Ver 4 auto dock/

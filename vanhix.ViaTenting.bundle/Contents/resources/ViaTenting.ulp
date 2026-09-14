@@ -1,0 +1,94 @@
+#usage "<b>Via Tenting</b> — scan vias for the VanHix add-in.\n<p>Mode: SCAN &lt;output.json&gt;\n"
+#require 6.0000
+
+string mode = "";
+string outPath = "";
+
+int firstVia = 1;
+
+string SoldermaskLabel(int flags) {
+  if (flags & VIA_FLAG_STOP) {
+    return "auto";
+  }
+  return "off";
+}
+
+void writeScanError(string errorCode) {
+  if (!outPath || !outPath[0]) {
+    exit(1);
+  }
+
+  output(outPath, "wt") {
+    printf("{\"ok\":0,\"error\":\"%s\",\"vias\":[]}\n", errorCode);
+  }
+  exit(0);
+}
+
+void exportViaJson(void) {
+  if (!outPath || !outPath[0]) {
+    exit(1);
+  }
+
+  if (!board) {
+    writeScanError("no_active_board");
+  }
+
+  firstVia = 1;
+
+  output(outPath, "wt") {
+    printf("{\"ok\":1,\"vias\":[");
+
+    board(B) {
+      B.signals(S) {
+        S.vias(V) {
+          if (!firstVia) {
+            printf(",");
+          }
+          firstVia = 0;
+          printf("{\"x\":%.6f,\"y\":%.6f,\"drill\":%.4f,\"net\":\"%s\",\"start\":%d,\"end\":%d,\"flags\":%d,\"mask\":\"%s\"}",
+            u2mm(V.x),
+            u2mm(V.y),
+            u2mm(V.drill),
+            S.name,
+            V.start,
+            V.end,
+            V.flags,
+            SoldermaskLabel(V.flags));
+        }
+      }
+    }
+
+    printf("],\"layers\":[");
+    int firstLayer = 1;
+    board(B) {
+      B.layers(L) {
+        // Exclude Layer 23 (tOrigins) and Layer 24 (bOrigins) which were removed in Fusion 360
+        if (L.visible && L.number != 23 && L.number != 24) {
+          if (!firstLayer) {
+            printf(",");
+          }
+          firstLayer = 0;
+          printf("%d", L.number);
+        }
+      }
+    }
+    printf("]}\n");
+  }
+
+  exit(0);
+}
+
+if (argc > 1) {
+  mode = strupr(argv[1]);
+}
+
+if (mode == "SCAN" && argc > 2) {
+  outPath = argv[2];
+  exportViaJson();
+}
+
+if (mode == "SCAN") {
+  exit(1);
+}
+
+exit(0);

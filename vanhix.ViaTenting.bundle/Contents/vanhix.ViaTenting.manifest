@@ -1,0 +1,13 @@
+{
+    "autodeskProduct": "Fusion",
+    "type": "addin",
+    "author": "VanHix",
+    "description": {
+        "": "List all vias on the open Fusion Electronics PCB board and bulk-set solder mask with one click."
+    },
+    "version": "1.0.0",
+    "runOnStartup": true,
+    "supportedOS": "windows|mac",
+    "editEnabled": true,
+    "iconFilename": "resources/icons/32x32.png"
+}
