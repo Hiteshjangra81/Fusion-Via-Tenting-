@@ -15,7 +15,7 @@
     <ComponentEntry
       AppName="VanHix Via Tenting"
       Version="1.0.0"
-      ModuleName="./Contents/vanhix.ViaTenting.manifest"
+      ModuleName="./vanhix.ViaTenting.manifest"
       AppDescription="Scan all vias on the open PCB board and bulk-set solder mask (Auto, Off, Offset)." />
   </Components>
 </ApplicationPackage>
